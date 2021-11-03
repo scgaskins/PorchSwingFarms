@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/kolyasouvorin/Downloads/CSCI 340/PorchSwingFarms/PorchSwingFarmsDB.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1657"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:maincustomers"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Course" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="56"/><column index="2" value="32"/><column index="3" value="46"/><column index="4" value="81"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="CourseInstructor" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="99"/><column index="2" value="77"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Instructor" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="19"/><column index="2" value="59"/><column index="3" value="61"/><column index="4" value="53"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="customers" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="50"/><column index="2" value="65"/><column index="3" value="62"/><column index="4" value="75"/><column index="5" value="36"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">INSERT INTO customers
+(address, first_name, last_name, customer_id, email) VALUES
+(&quot;2010 Cleveland St (apt D-10) Conway 72032&quot;, &quot;Adam&quot;, &quot;Scheider&quot;, 2, NULL),
+(&quot;114 Melville Dr Maumelle 72113&quot;, &quot;Kay&quot;,&quot;Smith&quot;, 3, NULL),
+(&quot;4 Fairway Dr Maumelle 72113&quot;, &quot;Traci&quot;, &quot;Wilis&quot;, 4, NULL),
+(&quot;112 Bouriese Cir Maumelle 72113&quot;, &quot;Daris&quot;, &quot;Bright&quot;, 5, NULL),
+(&quot;15 Summerdale Ln Little Rock 72223&quot;, &quot;Dawne&quot;, &quot;Fox&quot;, 6, NULL),
+(&quot;21 Hickory Hills Cir Little Rock 72212&quot;, &quot;Debbie&quot;, &quot;Goolsby&quot;, 7, NULL),
+(&quot;8 Thomas Park Cir Little Rock 72223&quot;, &quot;Kasey&quot;, &quot;Andis&quot;, 8, NULL),
+(&quot;23 Margeaux Dr Little Rock 72223&quot;, &quot;Alese&quot;, &quot;Stroud&quot;, 9, NULL),
+(&quot;15 Solonge Cir (#4540) Little Rock 72223&quot;, &quot;Broke&quot;, &quot;Harper&quot;, 10, NULL),
+(&quot;7 Calais Ct Little Rock 72223&quot;, &quot;Vicki&quot;, &quot;Moran&quot;, 11, NULL),
+(&quot;9 Highfield Cv Little Rock 72211&quot;, &quot;Jessica&quot;, &quot;Myers&quot;, 12, NULL),
+(&quot;14101 Saint Michael Dr Little Rock 72211&quot;, &quot;Michelle&quot;, &quot;Harpe&quot;, 13, NULL),
+(&quot;13310 Ridgehaven Rd Little Rock 72211&quot;, &quot;Gina&quot;, &quot;Daily&quot;, 14, NULL),
+(&quot;43 Valley Estates Dr (#0823) Little Rock 72212&quot;, &quot;Jake&quot;, &quot;Keet&quot;, 15, NULL);
+
+INSERT INTO customers
+(address, first_name, last_name, customer_id, email) VALUES
+(&quot;13015 Morrison Rd Little Rock 72212&quot;, &quot;Giner&quot;, &quot;Young&quot;, 16, NULL),
+(&quot;1400 Old Forge Dr (#702) Little Rock 72227&quot;, &quot;Mozibur&quot;, &quot;Rahman&quot;, 17, NULL),
+(&quot;1623 Breckenridge Little Rock 72227&quot;, &quot;Brittany&quot;, &quot;Keil&quot;, 18, NULL),
+(&quot;248 River Ridge Pt (#6263) Little Rock 72223&quot;, &quot;Lisa&quot;, &quot;Fischer&quot;, 19, NULL),
+(&quot;8 Riding Rd ittle Rock 72227&quot;, &quot;Linda&quot;, &quot;Hicks&quot;, 20, NULL),
+(&quot;21 Leslie Circle Little Rock 72205&quot;, &quot;Christina&quot;, &quot;Wren&quot;, 21, NULL),
+(&quot;5 Tomahawk Rd Little Rock 72205&quot;, &quot;Jodie&quot;, &quot;Dailey&quot;, 22, NULL),
+(&quot;8 Archwood Rd Little 72205&quot;, &quot;Jen&quot;, &quot;Boulden&quot;, 23, NULL),
+(&quot;6424 Evergreen Dr Little Rock 72207&quot;, &quot;Polly&quot;, &quot;Locket-Fox&quot;, 24, NULL),
+(&quot;720 Hall Dr Little Rock 72205&quot;, &quot;Stephanie&quot;, &quot;Matthews&quot;, 25, NULL),
+(&quot;1505 Winslow Dr Littl Rock 72207&quot;, &quot;JoAnne&quot;, &quot;Mills&quot;, 26, NULL), 
+(&quot;25 Shannon Dr  Little 72207&quot;, &quot;Sandra&quot;, &quot;McGrew&quot;, 27, NULL),
+(&quot;138 White Oak Ln Little Rock 72207&quot;, &quot;Sarah&quot;, &quot;Coleman&quot;, 28, NULL),
+(&quot;1 Sunset Dr Little Rock 72207&quot;, &quot;Hussman&quot;, &quot;Hussman&quot;, 29, NULL),
+(&quot;6717 Kenwood Rd Little 72207&quot;, &quot;Jason&quot;, &quot;Bermingham&quot;, 30, NULL),
+(&quot;2101 Durwood Rd Little Rock 72207&quot;, &quot;Elizabeth&quot;, &quot;Henry-McKeever&quot;, 31, NULL),
+(&quot;2410 N Fillmore St Little Rock 72207&quot;, &quot;Sarah&quot;, &quot;Priebe&quot;, 32, NULL),
+(&quot;1 Saint John Ct Little Rock 72207&quot;, &quot;Jennifer&quot;, &quot;de Loe&quot;, 33, NULL),
+(&quot;5206 Country Club Blvd Little Rock 72207&quot;, &quot;Catherine&quot;, &quot;Schuhmacher&quot;, 34, NULL),
+(&quot;1917 N Tyler St Little Rock 72207&quot;, &quot;Ashely&quot;, &quot;Baker&quot;, 35, NULL),
+(&quot;5114 Sherwood Rd Little Rock 72207&quot;, &quot;Mary Margaret&quot;, &quot;Marks&quot;, 36, NULL),
+(&quot;5120 Sherwood Rd Little Rock 72207&quot;, &quot;Katheryn&quot;, &quot;Huff&quot;, 37, NULL),
+(&quot;5300 Sherwood Rd Little Rock 72207&quot;, &quot;Lee&quot;, &quot;Lee&quot;, 38, NULL),
+(&quot;5400 Edgewood Rd Little Rock 72207&quot;, &quot;Brandy&quot;, &quot;Wood&quot;, 39, NULL),
+(&quot;5618 Edgewood Rd Little Rock 72207&quot;, &quot;Richard&quot;, &quot;Blank Jr.&quot;, 40, NULL),
+(&quot;5800 Edgewood Rd Little Rock 72207&quot;, &quot;Catherine&quot;, &quot;Robben&quot;, 41, NULL),
+(&quot;5107 Hawthorne Rd Little Rock 72207&quot;, &quot;CJ&quot;, &quot;Phillips&quot;, 42, NULL),
+(&quot;4817 Stonewall Little Rock 72207&quot;, &quot;Tish&quot;, &quot;Delozier&quot;, 43, NULL),
+(&quot;1809 N Monroe St Little Rock 72207&quot;, &quot;Chandler&quot;, &quot;Bailey&quot;, 44, NULL),
+(&quot;1923 N Jackson Little Rock 72207&quot;, &quot;Kevin&quot;, &quot;Walsh&quot;, 45, NULL);
+
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
