@@ -2,41 +2,65 @@
 @model PorchSwingFarms.Pages.Customers.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Customers";
 }
 
-<h1>Index</h1>
+<h1>Customers</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Address)
+                @Html.DisplayNameFor(model => model.Customers[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].City)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Customers[0].LastName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].ZipCode)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.AddressSort">
+                    @Html.DisplayNameFor(model => model.Customers[0].Address)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].FirstName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CitySort">
+                    @Html.DisplayNameFor(model => model.Customers[0].City)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].LastName)
+                @Html.DisplayNameFor(model => model.Customers[0].ZipCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Email)
+                @Html.DisplayNameFor(model => model.Customers[0].Email)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Customer) {
+@foreach (var item in Model.Customers) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
@@ -45,12 +69,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)

@@ -19,11 +19,55 @@ namespace PorchSwingFarms.Pages.Customers
             _context = context;
         }
 
-        public IList<Customer> Customer { get;set; }
+        public string NameSort { get; set; }
+        public string AddressSort { get; set; }
+        public string CitySort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public IList<Customer> Customers { get;set; }
+
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            Customer = await _context.Customers.ToListAsync();
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            AddressSort = sortOrder == "Address" ? "address_desc" : "Address";
+            CitySort = sortOrder == "City" ? "city_desc" : "City";
+
+            CurrentFilter = searchString;
+
+            IQueryable<Customer> customersIQ = from c in _context.Customers
+                                             select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customersIQ = customersIQ.Where(c => c.FirstName.ToUpper().Contains(searchString.ToUpper())
+                || c.LastName.ToUpper().Contains(searchString.ToUpper())
+                );
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    customersIQ = customersIQ.OrderByDescending(s => s.LastName);
+                    break;
+                case "Address":
+                    customersIQ = customersIQ.OrderBy(s => s.Address);
+                    break;
+                case "address_desc":
+                    customersIQ = customersIQ.OrderByDescending(s => s.Address);
+                    break;
+                case "City":
+                    customersIQ = customersIQ.OrderBy(s => s.City).ThenBy(s => s.LastName);
+                    break;
+                case "city_desc":
+                    customersIQ = customersIQ.OrderBy(s => s.City).ThenBy(s => s.LastName);
+                    break;
+                default:
+                    customersIQ = customersIQ.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            Customers = await customersIQ.AsNoTracking().ToListAsync();
         }
     }
 }
