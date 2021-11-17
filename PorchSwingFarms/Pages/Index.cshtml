@@ -4,7 +4,18 @@
     ViewData["Title"] = "Home page";
 }
 
+<link rel="stylesheet" href="@(nameof(PorchSwingFarms)).styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet" >
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>There were (X) new orders. Here are the 5 most recent: </p>
+</div>
+
+<div class="text-center">
+    <p> <small> Fetched at: 1:13pm </small></p>
+</div>
+
+<div class="text-center">
+    <h2> *Insert table fetched from wix* </h2>
 </div>
