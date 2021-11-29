@@ -1,0 +1,60 @@
+@page
+@model PorchSwingFarms.Pages.Orders.IndexModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Subscription.Customer.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Subscription.Customer.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].DeliveryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].DeliveredYN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].PaidForYN)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subscription.Customer.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subscription.Customer.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveredYN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaidForYN)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OrderID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.OrderID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrderID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,55 @@
+@page
+@model PorchSwingFarms.Pages.Subscriptions.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Subscription</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Subscription.SubscriptionID" />
+            <div class="form-group">
+                <label asp-for="Subscription.Price" class="control-label"></label>
+                <input asp-for="Subscription.Price" class="form-control" />
+                <span asp-validation-for="Subscription.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subscription.Quantity" class="control-label"></label>
+                <input asp-for="Subscription.Quantity" class="form-control" />
+                <span asp-validation-for="Subscription.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subscription.Frequency" class="control-label"></label>
+                <input asp-for="Subscription.Frequency" class="form-control" />
+                <span asp-validation-for="Subscription.Frequency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subscription.StartDate" class="control-label"></label>
+                <input asp-for="Subscription.StartDate" class="form-control" />
+                <span asp-validation-for="Subscription.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subscription.EndDate" class="control-label"></label>
+                <input asp-for="Subscription.EndDate" class="form-control" />
+                <span asp-validation-for="Subscription.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
