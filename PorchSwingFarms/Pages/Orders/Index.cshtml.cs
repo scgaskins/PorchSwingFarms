@@ -23,7 +23,10 @@ namespace PorchSwingFarms.Pages.Orders
 
         public async Task OnGetAsync()
         {
-            Order = await _context.Orders.ToListAsync();
+            Order = await _context.Orders
+                .Include(o => o.Subscription)
+                .ThenInclude(s => s.Customer)
+                .ToListAsync();
         }
     }
 }

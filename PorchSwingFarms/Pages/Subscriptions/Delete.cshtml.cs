@@ -29,7 +29,9 @@ namespace PorchSwingFarms.Pages.Subscriptions
                 return NotFound();
             }
 
-            Subscription = await _context.Subscriptions.FirstOrDefaultAsync(m => m.SubscriptionID == id);
+            Subscription = await _context.Subscriptions
+                .Include(s => s.Customer)
+                .FirstOrDefaultAsync(m => m.SubscriptionID == id);
 
             if (Subscription == null)
             {

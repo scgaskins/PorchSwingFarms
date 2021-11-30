@@ -30,7 +30,10 @@ namespace PorchSwingFarms.Pages.Orders
                 return NotFound();
             }
 
-            Order = await _context.Orders.FirstOrDefaultAsync(m => m.OrderID == id);
+            Order = await _context.Orders
+                .Include(o => o.Subscription)
+                .ThenInclude(s => s.Customer)
+                .FirstOrDefaultAsync(m => m.OrderID == id);
 
             if (Order == null)
             {

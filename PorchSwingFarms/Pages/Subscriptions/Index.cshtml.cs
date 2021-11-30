@@ -23,7 +23,10 @@ namespace PorchSwingFarms.Pages.Subscriptions
 
         public async Task OnGetAsync()
         {
-            Subscription = await _context.Subscriptions.ToListAsync();
+            Subscription = await _context.Subscriptions
+                .Include(s => s.Customer)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
