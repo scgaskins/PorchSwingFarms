@@ -427,6 +427,39 @@ namespace PorchSwingFarms.Data
             };
 
             context.Customers.AddRange(customers);
+
+            var testCustomer = new Customer
+            {
+                Address="1600 Washington Ave",
+                City="Conway",
+                ZipCode=72032,
+                FirstName="Test",
+                LastName="Test",
+                Email="testte@hendrix.edu"
+            };
+
+            context.Customers.Add(testCustomer);
+
+            var testSubscription = new Subscription
+            {
+                Price = 6.00M,
+                Quantity = 2,
+                Frequency = 2,
+                StartDate = DateTime.Parse("2021-11-27"),
+                Customer = testCustomer,
+            };
+
+            context.Subscriptions.Add(testSubscription);
+
+            var testOrder = new Order 
+            {
+                DeliveredYN=false,
+                PaidForYN=false,
+                DeliveryDate = DateTime.Parse("2021-11-27"),
+                Subscription=testSubscription
+            };
+            context.Orders.Add(testOrder);
+
             context.SaveChanges();
         }
     }
