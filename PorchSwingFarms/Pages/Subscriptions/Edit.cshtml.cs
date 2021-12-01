@@ -11,7 +11,7 @@ using PorchSwingFarms.Models;
 
 namespace PorchSwingFarms.Pages.Subscriptions
 {
-    public class EditModel : PageModel
+    public class EditModel : CustomerNamePageModel
     {
         private readonly PorchSwingFarms.Data.FarmContext _context;
 
@@ -31,49 +31,44 @@ namespace PorchSwingFarms.Pages.Subscriptions
             }
 
             Subscription = await _context.Subscriptions
-                .Include(s => s.Customer)
+                .Include(c => c.Customer)
                 .FirstOrDefaultAsync(m => m.SubscriptionID == id);
 
             if (Subscription == null)
             {
                 return NotFound();
             }
+            PopulateCustomersDropDownList(_context, Subscription.CustomerID);
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Subscription).State = EntityState.Modified;
+            var subscriptionToUpdate = await _context.Subscriptions.FindAsync(id);
 
-            try
+            if (subscriptionToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Subscription>(
+                 subscriptionToUpdate,
+                 "subscription",   // Prefix for form value.
+                   s => s.SubscriptionID, s => s.Price, s => s.Quantity, s => s.Frequency, s => s.StartDate, s => s.PaymentDetails, s => s.DeliveryIns, s => s.EndDate, s => s.Customer))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SubscriptionExists(Subscription.SubscriptionID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool SubscriptionExists(int id)
-        {
-            return _context.Subscriptions.Any(e => e.SubscriptionID == id);
+            // Select DepartmentID if TryUpdateModelAsync fails.
+            PopulateCustomersDropDownList(_context, subscriptionToUpdate.CustomerID);
+            return Page();
         }
     }
 }
