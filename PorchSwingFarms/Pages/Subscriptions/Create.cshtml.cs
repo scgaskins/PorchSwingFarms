@@ -10,7 +10,7 @@ using PorchSwingFarms.Models;
 
 namespace PorchSwingFarms.Pages.Subscriptions
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CustomerNamePageModel
     {
         private readonly PorchSwingFarms.Data.FarmContext _context;
 
@@ -21,6 +21,8 @@ namespace PorchSwingFarms.Pages.Subscriptions
 
         public IActionResult OnGet()
         {
+            PopulateCustomersDropDownList(_context);
+
             return Page();
         }
 
@@ -30,15 +32,19 @@ namespace PorchSwingFarms.Pages.Subscriptions
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptySubscription = new Subscription();
+
+            if (await TryUpdateModelAsync<Subscription>(
+                 emptySubscription,
+                 "course",   // Prefix for form value.
+                 s => s.SubscriptionID, s => s.Price, s => s.Quantity, s => s.Frequency, s => s.StartDate, s => s.PaymentDetails, s => s.DeliveryIns, s=> s.EndDate, s=> s.Customer ))
             {
-                return Page();
+                _context.Subscriptions.Add(emptySubscription);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-
-            _context.Subscriptions.Add(Subscription);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            PopulateCustomersDropDownList(_context, emptySubscription.CustomerID);
+            return Page();
         }
     }
 }

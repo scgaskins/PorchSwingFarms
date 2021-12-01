@@ -29,5 +29,6 @@ namespace PorchSwingFarms.Models
         public DateTime? EndDate { get; set; }
         [Required]
         public Customer Customer { get; set; }
+        public int CustomerID { get; set; }
     }
 }
