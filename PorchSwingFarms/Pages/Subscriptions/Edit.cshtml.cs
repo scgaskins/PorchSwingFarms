@@ -60,7 +60,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
             if (await TryUpdateModelAsync<Subscription>(
                  subscriptionToUpdate,
                  "subscription",   // Prefix for form value.
-                   s => s.SubscriptionID, s => s.Price, s => s.Quantity, s => s.Frequency, s => s.StartDate, s => s.PaymentDetails, s => s.DeliveryIns, s => s.EndDate, s => s.Customer))
+                   s => s.SubscriptionID, s => s.Price, s => s.Quantity, s => s.Frequency, s => s.StartDate, s => s.PaymentDetails, s => s.DeliveryIns, s => s.EndDate, s => s.CustomerID))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
