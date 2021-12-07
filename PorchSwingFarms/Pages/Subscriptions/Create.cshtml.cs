@@ -36,8 +36,8 @@ namespace PorchSwingFarms.Pages.Subscriptions
 
             if (await TryUpdateModelAsync<Subscription>(
                  emptySubscription,
-                 "course",   // Prefix for form value.
-                 s => s.SubscriptionID, s => s.Price, s => s.Quantity, s => s.Frequency, s => s.StartDate, s => s.PaymentDetails, s => s.DeliveryIns, s=> s.EndDate, s=> s.Customer ))
+                 "subscription",   // Prefix for form value.
+                 s => s.SubscriptionID, s => s.Price, s => s.Quantity, s => s.Frequency, s => s.StartDate, s => s.PaymentDetails, s => s.DeliveryIns, s=> s.EndDate, s=> s.CustomerID ))
             {
                 _context.Subscriptions.Add(emptySubscription);
                 await _context.SaveChangesAsync();

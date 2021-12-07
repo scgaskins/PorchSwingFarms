@@ -18,7 +18,9 @@ namespace PorchSwingFarms.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DeliveryDate { get; set; }
+        
         [Required]
+        public int SubscriptionID { get; set; }
         public Subscription Subscription { get; set; }
     }
 }

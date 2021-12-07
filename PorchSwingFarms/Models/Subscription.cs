@@ -27,8 +27,11 @@ namespace PorchSwingFarms.Models
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
-        [Required]
+        
         public Customer Customer { get; set; }
+        [Required]
         public int CustomerID { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }
