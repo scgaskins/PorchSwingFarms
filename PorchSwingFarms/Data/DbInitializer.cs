@@ -424,6 +424,325 @@ namespace PorchSwingFarms.Data
                     LastName="Walsh",
                     Email=null
                 }
+                ,
+                new Customer
+                {
+                    Address="1824 N Jackson",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Catherine",
+                    LastName="Robinson",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1822 Shadow Ln",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Lauren",
+                    LastName="Blair",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1911 Shadow Ln",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Toni",
+                    LastName="Tucker",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1817 Shadow Ln",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Stacy",
+                    LastName="Grobmyer",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1814 Shadow Ln",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Anne",
+                    LastName="Tedford",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1807 shadow Ln",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Anne",
+                    LastName="Wallace",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1923 N Jackson",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Kevin",
+                    LastName="Walsh",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="8 Armistead",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Ramsey",
+                    LastName="Ramsey",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="18 Edgehill Rd",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Charlotte",
+                    LastName="LaFrance",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="33 Edgehill Rd",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Linda",
+                    LastName="LaFrance",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="3700 Cantrell Rd",
+                    City="Little Rock",
+                    ZipCode=72202,
+                    FirstName="Murry",
+                    LastName="Newbern",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="36 Sherill Rd",
+                    City="Little Rock",
+                    ZipCode=72202,
+                    FirstName="Judy",
+                    LastName="Wilbourn",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="5108 Woodlawn Dr",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Debra",
+                    LastName="Milam",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1105 North Monroe St",
+                    City="Little Rock",
+                    ZipCode=72209,
+                    FirstName="Le Ann",
+                    LastName="Robertson",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="4300 S. Lookout Rd",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Amanda",
+                    LastName="Orcutt",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="805 Beachwood St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Katherine",
+                    LastName="West",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="713 Beechwood St",
+                    ApartmentNum="#1",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Caroline",
+                    LastName="Brown",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="4516 I St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Susan",
+                    LastName="Inman",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="808 Ash St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Bettina",
+                    LastName="Brownstein",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="122 Colonial Court",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Veronica",
+                    LastName="Goodloe",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="3814 Compton St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Patty",
+                    LastName="Joliff",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="215 Crystal Court",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Sylvia",
+                    LastName="Amsler",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="3114 Edgerstoune Ln",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="BJ",
+                    LastName="Moses",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="308 Midland St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Nikki",
+                    LastName="Lovell",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="416 Fairfax",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Barbara",
+                    LastName="Baldwin",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="524 S. Booker St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Nathan and Carrie",
+                    LastName="Williams",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="515 S. Booker St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Andrea",
+                    LastName="Wills",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="109 South Schiller St",
+                    City="Little Rock",
+                    ZipCode=72205,
+                    FirstName="Amanda",
+                    LastName="Linn",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="414 E. Capitol Ave",
+                    ApartmentNum="#210",
+                    City="Little Rock",
+                    ZipCode=72202,
+                    FirstName="Amy",
+                    LastName="Carpentier",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1905 Louisiana St",
+                    City="Little Rock",
+                    ZipCode=72206,
+                    FirstName="Verda",
+                    LastName="Davenport-Booher",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1716 Louisiana St",
+                    City="Little Rock",
+                    ZipCode=72206,
+                    FirstName="Angela",
+                    LastName="Sorter",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="15 Libby Ln",
+                    City="Little Rock",
+                    ZipCode=72206,
+                    FirstName="Sandra",
+                    LastName="Jones",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="257 Plainview Cir",
+                    City="North Little Rock",
+                    ZipCode=72116,
+                    FirstName="John",
+                    LastName="Cooke",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="5324 N Grandview St",
+                    City="Little Rock",
+                    ZipCode=72207,
+                    FirstName="Sara",
+                    LastName="Mitchell",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1819 River Heights Dr",
+                    ApartmentNum="#2202",
+                    City="Little Rock",
+                    ZipCode=72202,
+                    FirstName="Kevin",
+                    LastName="Walsh",
+                    Email=null
+                }
             };
 
             context.Customers.AddRange(customers);
