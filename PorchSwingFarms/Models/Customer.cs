@@ -21,7 +21,13 @@ namespace PorchSwingFarms.Models
         [Display(Name = "Last Name")]
         public String LastName { get; set; }
         public String? Email { get; set; }
-        
+
+        [Display(Name = "Name")]
+        public String FullName
+        {
+            get => LastName + ", " + FirstName;
+        }
+
         public ICollection<Subscription> Subscriptions { get; set; }
     }
 }

@@ -10,63 +10,140 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by customer name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index"
+               asp-route-pageSize="@Model.CurrentSize">
+                Back to full List
+            </a>
+        </p>
+    </div>
+</form>
+
+<p>
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter">
+        10 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-pageSize="20">
+        20 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-pageSize="50">
+        50 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-pageSize="100">
+        100 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-noPages="true">
+        Max
+    </a>
+</p>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].Customer.FirstName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   asp-route-pageSize="@Model.CurrentSize">
+                    @Html.DisplayNameFor(model => model.Subscriptions[0].Customer.FullName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].Customer.LastName)
+                @Html.DisplayNameFor(model => model.Subscriptions[0].Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].Price)
+                @Html.DisplayNameFor(model => model.Subscriptions[0].Quantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].Quantity)
+                @Html.DisplayNameFor(model => model.Subscriptions[0].Frequency)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].Frequency)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   asp-route-pageSize="@Model.CurrentSize">
+                    @Html.DisplayNameFor(model => model.Subscriptions[0].StartDate)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subscription[0].EndDate)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EndDateSort"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   asp-route-pageSize="@Model.CurrentSize">
+                    @Html.DisplayNameFor(model => model.Subscriptions[0].EndDate)
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Subscription) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Frequency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.SubscriptionID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.SubscriptionID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.SubscriptionID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Subscriptions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Frequency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.SubscriptionID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.SubscriptionID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.SubscriptionID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Subscriptions.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Subscriptions.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Subscriptions.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-pageSize="@Model.CurrentSize"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Subscriptions.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-pageSize="@Model.CurrentSize"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

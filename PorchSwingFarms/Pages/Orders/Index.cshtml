@@ -14,10 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Subscription.Customer.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].Subscription.Customer.LastName)
+                @Html.DisplayNameFor(model => model.Order[0].Subscription.Customer.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].DeliveryDate)
@@ -35,10 +32,7 @@
 @foreach (var item in Model.Order) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Subscription.Customer.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subscription.Customer.LastName)
+                @Html.DisplayFor(modelItem => item.Subscription.Customer.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DeliveryDate)

@@ -31,7 +31,8 @@ namespace PorchSwingFarms.Pages.Customers
 
         public PaginatedList<Customer> Customers { get;set; }
 
-        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, int? pageSize)
+        // If noPages is true, it puts all items on one page
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, int? pageSize, bool? noPages)
         {
             CurrentSort = sortOrder;
             CurrentSize = pageSize;
@@ -80,6 +81,11 @@ namespace PorchSwingFarms.Pages.Customers
                 default:
                     customersIQ = customersIQ.OrderBy(s => s.LastName);
                     break;
+            }
+
+            if (noPages == true)
+            {
+                pageSize = customersIQ.Count();
             }
           
             var defaultSize = Configuration.GetValue("PageSize", 10);

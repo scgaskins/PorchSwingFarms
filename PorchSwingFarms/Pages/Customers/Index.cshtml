@@ -48,6 +48,12 @@
        asp-route-currentFilter="@Model.CurrentFilter"
        asp-route-pageSize="100">
         100 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-noPages="true">
+        Max
     </a>
 </p>
 
