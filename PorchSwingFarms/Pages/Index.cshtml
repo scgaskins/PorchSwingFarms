@@ -6,13 +6,29 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>There were (X) new orders. Here are the 5 most recent: </p>
 </div>
 
-<div class="text-center">
-    <p> <small> Fetched at: 1:13pm </small></p>
-</div>
+<script>
+    function fileValidation() {
+        var fileInput =
+            document.getElementById('myFile');
 
+        var filePath = fileInput.value;
+
+        var allowedExtensions =/(\.csv)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        }
+    }
+</script>
 <div class="text-center">
-    <h2> *Insert table fetched from wix* </h2>
+    <h4>Upload .CSV file:</h4>
+
+    <form name="myForm" action="/action_page.php" onsubmit="return fileValidation()" method="post" required>
+        <input type="file" id="myFile" name="filename">
+        <input type="submit">
+    </form>
 </div>
