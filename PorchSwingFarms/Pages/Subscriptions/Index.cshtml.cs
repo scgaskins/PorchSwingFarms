@@ -93,5 +93,73 @@ namespace PorchSwingFarms.Pages.Subscriptions
             Subscriptions = await PaginatedList<Subscription>.CreateAsync(
                 subscriptionsIQ.AsNoTracking(), pageIndex ?? 1, pageSize ?? defaultSize);
         }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            List<Subscription> subscriptions = await _context.Subscriptions.Include(s => s.Orders).ToListAsync();
+            List<Order> newOrders = new List<Order>();
+
+            foreach (Subscription sub in subscriptions)
+            {
+                if (sub.IsActive)
+                {
+                    List<Order> existingOrders = sub.Orders.OrderByDescending(o => o.DeliveryDate).ToList();
+                    DateTime? lastOrderDate = existingOrders.Count > 0 ? existingOrders.First().DeliveryDate : null;
+                    DateTime startDate = lastOrderDate == null ? sub.StartDate : lastOrderDate.Value;
+
+                    DateTime currentOrderDate;
+                    if (sub.Frequency == Subscription.OrderFrequency.Weekly)
+                    {
+                        currentOrderDate = startDate.AddDays(7);
+                    }
+                    else if (sub.Frequency == Subscription.OrderFrequency.Biweekly)
+                    {
+                        currentOrderDate = startDate.AddDays(14);
+                    }
+                    else if (sub.Frequency == Subscription.OrderFrequency.Monthly)
+                    {
+                        currentOrderDate = startDate.AddDays(30);
+                    } else if (sub.Frequency == Subscription.OrderFrequency.OneTime && lastOrderDate == null)
+                    {
+                        currentOrderDate = startDate;
+                    } 
+                    else
+                    {
+                        continue;
+                    }
+
+
+                    while ((sub.EndDate != null && currentOrderDate <= sub.EndDate) && currentOrderDate <= DateTime.Now.AddDays(60))
+                    {
+                        Order newOrder = new Order();
+                        newOrder.DeliveredYN = false;
+                        newOrder.PaidForYN = false;
+                        newOrder.SubscriptionID = sub.SubscriptionID;
+                        newOrder.DeliveryDate = currentOrderDate;
+                        newOrder.Subscription = sub;
+                        newOrders.Add(newOrder);
+
+                        if (sub.Frequency == Subscription.OrderFrequency.Weekly) {
+                            currentOrderDate = currentOrderDate.AddDays(7);
+                        } else if (sub.Frequency == Subscription.OrderFrequency.Biweekly)
+                        {
+                            currentOrderDate = currentOrderDate.AddDays(14);
+                        } else if (sub.Frequency == Subscription.OrderFrequency.Monthly)
+                        {
+                            currentOrderDate = currentOrderDate.AddDays(30);
+                        } else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine(newOrders.Count);
+
+            _context.Orders.AddRange(newOrders);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
     }
 }
