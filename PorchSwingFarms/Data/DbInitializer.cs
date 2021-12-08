@@ -763,7 +763,7 @@ namespace PorchSwingFarms.Data
             {
                 Price = 6.00M,
                 Quantity = 2,
-                Frequency = 2,
+                Frequency = Subscription.OrderFrequency.Biweekly,
                 StartDate = DateTime.Parse("2021-11-27"),
                 Customer = testCustomer,
             };

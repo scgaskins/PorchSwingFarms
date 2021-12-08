@@ -30,7 +30,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Subscription.Frequency" class="control-label"></label>
-                <input asp-for="Subscription.Frequency" class="form-control" />
+                <select asp-for="Subscription.Frequency" class="form-control"
+                        asp-items="@Model.OrderFrequenciesSL"></select>
                 <span asp-validation-for="Subscription.Frequency" class="text-danger"></span>
             </div>
             <div class="form-group">

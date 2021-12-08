@@ -23,6 +23,13 @@ namespace PorchSwingFarms.Pages.Subscriptions
         [BindProperty]
         public Subscription Subscription { get; set; }
 
+        public SelectList OrderFrequenciesSL { get; set; }
+
+        public void PopulateOrderFrequenciesDropDownList()
+        {
+            OrderFrequenciesSL = new SelectList(Enum.GetValues(typeof(Subscription.OrderFrequency)));
+        }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -39,6 +46,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
                 return NotFound();
             }
             PopulateCustomersDropDownList(_context, Subscription.CustomerID);
+            PopulateOrderFrequenciesDropDownList();
 
             return Page();
         }
@@ -68,6 +76,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
 
             // Select DepartmentID if TryUpdateModelAsync fails.
             PopulateCustomersDropDownList(_context, subscriptionToUpdate.CustomerID);
+            PopulateOrderFrequenciesDropDownList();
             return Page();
         }
     }

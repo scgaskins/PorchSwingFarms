@@ -6,6 +6,11 @@ namespace PorchSwingFarms.Models
 {
     public class Subscription
     {
+        public enum OrderFrequency
+        {
+            Weekly, Biweekly, Monthly, OneTime
+        };
+
         public int SubscriptionID { get; set; }
         [Required]
         [DataType(DataType.Currency)]
@@ -13,7 +18,7 @@ namespace PorchSwingFarms.Models
         [Required]
         public int Quantity { get; set; }
         [Required]
-        public int Frequency { get; set; }
+        public OrderFrequency Frequency { get; set; }
         [Display(Name = "Delivery Instructions")]
         public String DeliveryIns { get; set; }
         [Display(Name = "Payment Details")]

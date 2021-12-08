@@ -22,12 +22,19 @@ namespace PorchSwingFarms.Pages.Subscriptions
         public IActionResult OnGet()
         {
             PopulateCustomersDropDownList(_context);
+            PopulateOrderFrequenciesDropDownList();
 
             return Page();
         }
 
         [BindProperty]
         public Subscription Subscription { get; set; }
+
+        public SelectList OrderFrequenciesSL { get; set; }
+
+        public void PopulateOrderFrequenciesDropDownList() {
+            OrderFrequenciesSL = new SelectList(Enum.GetValues(typeof(Subscription.OrderFrequency)));
+        }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -44,6 +51,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
                 return RedirectToPage("./Index");
             }
             PopulateCustomersDropDownList(_context, emptySubscription.CustomerID);
+            PopulateOrderFrequenciesDropDownList();
             return Page();
         }
     }
