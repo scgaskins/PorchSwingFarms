@@ -8,6 +8,29 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+
+<script>function arrayToTable(tableData) {
+        var table = $('<table></table>');
+        $(tableData).each(function (i, rowData) {
+            var row = $('<tr></tr>');
+            $(rowData).each(function (j, cellData) {
+                row.append($('<td>' + cellData + '</td>'));
+            });
+            table.append(row);
+        });
+        return table;
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/Users/aliviaallen/Downloads/Orders-5.csv",
+        success: function (data) {
+            $('body').append(arrayToTable(Papa.parse(data).data));
+        }
+    });</script>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 </div>
