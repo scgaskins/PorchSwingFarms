@@ -94,9 +94,22 @@ namespace PorchSwingFarms.Pages.Subscriptions
                 subscriptionsIQ.AsNoTracking(), pageIndex ?? 1, pageSize ?? defaultSize);
         }
 
+        // This is called when the Genrate all new orders button is pressed
+        // Also called whenever any post request is made
         public async Task<IActionResult> OnPostAsync()
         {
             List<Subscription> subscriptions = await _context.Subscriptions.Include(s => s.Orders).ToListAsync();
+
+            List<Order> newOrders = GenerateAllNewOrders(subscriptions);
+
+            _context.Orders.AddRange(newOrders);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+
+        public List<Order> GenerateAllNewOrders(List<Subscription> subscriptions)
+        {
             List<Order> newOrders = new List<Order>();
 
             foreach (Subscription sub in subscriptions)
@@ -105,61 +118,74 @@ namespace PorchSwingFarms.Pages.Subscriptions
                 {
                     List<Order> existingOrders = sub.Orders.OrderByDescending(o => o.DeliveryDate).ToList();
                     DateTime? lastOrderDate = existingOrders.Count > 0 ? existingOrders.First().DeliveryDate : null;
-                    DateTime startDate = lastOrderDate == null ? sub.StartDate : lastOrderDate.Value;
 
-                    DateTime currentOrderDate;
-                    if (sub.Frequency == Subscription.OrderFrequency.Weekly)
-                    {
-                        currentOrderDate = startDate.AddDays(7);
-                    }
-                    else if (sub.Frequency == Subscription.OrderFrequency.Biweekly)
-                    {
-                        currentOrderDate = startDate.AddDays(14);
-                    }
-                    else if (sub.Frequency == Subscription.OrderFrequency.Monthly)
-                    {
-                        currentOrderDate = startDate.AddDays(30);
-                    } else if (sub.Frequency == Subscription.OrderFrequency.OneTime && lastOrderDate == null)
-                    {
-                        currentOrderDate = startDate;
-                    } 
-                    else
+
+                    // If the subscription is one time only and there is already a previous order
+                    // Then we don't want to generate any more orders
+                    if (sub.Frequency == Subscription.OrderFrequency.OneTime && lastOrderDate != null)
                     {
                         continue;
                     }
 
+                    DateTime currentOrderDate;
+
+                    if (lastOrderDate != null)
+                    {
+                        currentOrderDate = IncrementOrderDate(lastOrderDate.Value, sub.Frequency);
+                    } else
+                    {
+                        currentOrderDate = sub.StartDate;
+                    }
 
                     while ((sub.EndDate != null && currentOrderDate <= sub.EndDate) && currentOrderDate <= DateTime.Now.AddDays(60))
                     {
-                        Order newOrder = new Order();
-                        newOrder.DeliveredYN = false;
-                        newOrder.PaidForYN = false;
-                        newOrder.SubscriptionID = sub.SubscriptionID;
-                        newOrder.DeliveryDate = currentOrderDate;
-                        newOrder.Subscription = sub;
+                        Order newOrder = MakeNewOrder(sub, currentOrderDate);
                         newOrders.Add(newOrder);
 
-                        if (sub.Frequency == Subscription.OrderFrequency.Weekly) {
-                            currentOrderDate = currentOrderDate.AddDays(7);
-                        } else if (sub.Frequency == Subscription.OrderFrequency.Biweekly)
-                        {
-                            currentOrderDate = currentOrderDate.AddDays(14);
-                        } else if (sub.Frequency == Subscription.OrderFrequency.Monthly)
-                        {
-                            currentOrderDate = currentOrderDate.AddDays(30);
-                        } else
+                        // only make one order for a one time subscription
+                        if (sub.Frequency == Subscription.OrderFrequency.OneTime)
                         {
                             break;
+                        }
+                        else
+                        {
+                            currentOrderDate = IncrementOrderDate(currentOrderDate, sub.Frequency);
                         }
                     }
                 }
             }
-            Console.WriteLine(newOrders.Count);
+            return newOrders;
+        }
 
-            _context.Orders.AddRange(newOrders);
-            await _context.SaveChangesAsync();
+        public Order MakeNewOrder(Subscription subscription, DateTime deliveryDate)
+        {
+            Order newOrder = new Order();
+            newOrder.DeliveredYN = false;
+            newOrder.PaidForYN = false;
+            newOrder.SubscriptionID = subscription.SubscriptionID;
+            newOrder.DeliveryDate = deliveryDate;
+            newOrder.Subscription = subscription;
+            return newOrder;
+        }
 
-            return RedirectToPage("./Index");
+        public DateTime IncrementOrderDate(DateTime originalDate, Subscription.OrderFrequency frequency)
+        {
+            if (frequency == Subscription.OrderFrequency.Weekly)
+            {
+                return originalDate.AddDays(7);
+            }
+            else if (frequency == Subscription.OrderFrequency.Biweekly)
+            {
+                return originalDate.AddDays(14);
+            }
+            else if (frequency == Subscription.OrderFrequency.Monthly)
+            {
+                return originalDate.AddDays(30);
+            }
+            else
+            {
+                return originalDate;
+            }
         }
     }
 }
