@@ -5,50 +5,123 @@
     ViewData["Title"] = "Orders";
 }
 
-<h1>Index</h1>
+<h1>Orders</h1>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index"
+               asp-route-pageSize="@Model.CurrentSize">
+                Back to full List
+            </a>
+        </p>
+    </div>
+</form>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter">
+        10 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-pageSize="20">
+        20 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-pageSize="50">
+        50 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-pageSize="100">
+        100 per Page
+    </a> |
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       asp-route-noPages="true">
+        Max
+    </a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Subscription.Customer.FullName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   asp-route-pageSize="@Model.CurrentSize">
+                    @Html.DisplayNameFor(model => model.Orders[0].Subscription.Customer.LastName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].DeliveryDate)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   asp-route-pageSize="@Model.CurrentSize">
+                    @Html.DisplayNameFor(model => model.Orders[0].DeliveryDate)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].DeliveredYN)
+                @Html.DisplayNameFor(model => model.Orders[0].DeliveredYN)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].PaidForYN)
+                @Html.DisplayNameFor(model => model.Orders[0].PaidForYN)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subscription.Customer.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveredYN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaidForYN)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrderID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subscription.Customer.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveredYN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaidForYN)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.OrderID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.OrderID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Orders.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Orders.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Orders.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-pageSize="@Model.CurrentSize"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Orders.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-pageSize="@Model.CurrentSize"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
