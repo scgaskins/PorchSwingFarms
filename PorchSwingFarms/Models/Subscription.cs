@@ -32,6 +32,12 @@ namespace PorchSwingFarms.Models
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
+
+        [Display(Name = "Active")]
+        public bool IsActive
+        {
+            get =>  DateTime.Now >= StartDate &&  (EndDate == null || DateTime.Now <= EndDate);
+        }
         
         public Customer Customer { get; set; }
         [Required]
