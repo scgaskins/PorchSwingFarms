@@ -91,37 +91,43 @@
                     @Html.DisplayNameFor(model => model.Subscriptions[0].EndDate)
                 </a>
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subscriptions[0].IsActive)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Subscriptions)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Frequency)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.SubscriptionID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.SubscriptionID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.SubscriptionID">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frequency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SubscriptionID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SubscriptionID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SubscriptionID">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
