@@ -84,3 +84,8 @@ function CSVToArray(strData, strDelimiter) {
     }
     return (arrData);
 }
+
+$(document).on('click', '#btnRemoveFile', function () {
+    document.getElementById("fileToUpload").value = null;
+
+});

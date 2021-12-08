@@ -32,10 +32,16 @@ a {
   color: #0366d6;
 }
 
+.btn- {
+    color: red;
+    background-color: red;
+    border-color: darkred;
+}
+
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -72,6 +78,12 @@ html {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
+}
+
+button.btn-info {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
