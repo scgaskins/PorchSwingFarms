@@ -15,6 +15,98 @@ namespace PorchSwingFarms.Data
 
             var customers = new Customer[]
             {
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="John",
+                    LastName="Smith",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Mary",
+                    LastName="Peterson",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Kyle",
+                    LastName="Smath",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Robert",
+                    LastName="Johnson",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="John",
+                    LastName="Smithson",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Jane",
+                    LastName="Doe",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="John",
+                    LastName="Roe",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Sammy",
+                    LastName="Gaskins",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Bob",
+                    LastName="Robson",
+                    Email=null
+                },
+                new Customer
+                {
+                    Address="1600 Washington Ave",
+                    City="Conway",
+                    ZipCode=72032,
+                    FirstName="Alice",
+                    LastName="Allison",
+                    Email=null
+                },
+            };
+            /*{
                 new Customer{
                     Address="1909 Creekwood Dr",
                     City="Conway",
@@ -743,7 +835,7 @@ namespace PorchSwingFarms.Data
                     LastName="Walsh",
                     Email=null
                 }
-            };
+            };*/
 
             context.Customers.AddRange(customers);
 
