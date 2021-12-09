@@ -142,6 +142,8 @@ namespace PorchSwingFarms.Pages.Subscriptions
                         currentOrderDate = sub.StartDate;
                     }
 
+                    currentOrderDate = NextSaturday(currentOrderDate);
+
                     // When we stop generating orders
                     DateTime endDate = sub.EndDate != null ? sub.EndDate.Value : DateTime.Now.AddDays(DaysOrdersGenerated);
 
@@ -192,11 +194,23 @@ namespace PorchSwingFarms.Pages.Subscriptions
             }
             else if (frequency == Subscription.OrderFrequency.Monthly)
             {
-                return originalDate.AddDays(30);
+                return NextSaturday(originalDate.AddMonths(1));
             }
             else
             {
                 return originalDate;
+            }
+        }
+
+        public DateTime NextSaturday(DateTime originalDate)
+        {
+            DayOfWeek dayOfWeek = originalDate.DayOfWeek;
+            if (((int)dayOfWeek) == 0)
+            {
+                return originalDate.AddDays(7);
+            } else
+            {
+                return originalDate.AddDays(6 - ((int)dayOfWeek));
             }
         }
     }
