@@ -110,7 +110,8 @@ namespace PorchSwingFarms.Pages.Subscriptions
 
         public List<Order> GenerateAllNewOrders(List<Subscription> subscriptions)
         {
-
+            Console.WriteLine(subscriptions.Count);
+            
             List<Order> newOrders = new List<Order>();
 
             foreach (Subscription sub in subscriptions)
@@ -138,10 +139,17 @@ namespace PorchSwingFarms.Pages.Subscriptions
                         currentOrderDate = sub.StartDate;
                     }
 
-                    while ((sub.EndDate != null && currentOrderDate <= sub.EndDate) && currentOrderDate <= DateTime.Now.AddDays(60))
+                    // When we stop generating orders
+                    DateTime endDate = sub.EndDate != null ? sub.EndDate.Value : DateTime.Now.AddDays(60);
+
+                    while (currentOrderDate <= endDate)
                     {
-                        Order newOrder = MakeNewOrder(sub, currentOrderDate);
-                        newOrders.Add(newOrder);
+                        // Don't generate orders from the past
+                        if (currentOrderDate >= DateTime.Now)
+                        {
+                            Order newOrder = MakeNewOrder(sub, currentOrderDate);
+                            newOrders.Add(newOrder);
+                        }
 
                         // only make one order for a one time subscription
                         if (sub.Frequency == Subscription.OrderFrequency.OneTime)
