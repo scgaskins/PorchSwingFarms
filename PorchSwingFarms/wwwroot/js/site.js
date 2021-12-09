@@ -7,13 +7,13 @@
 var csvParsedArray = [];
 $(document).on('click', '#btnUploadFile', function () {
     if ($("#fileToUpload").get(0).files.length == 0) {
-        alert("Please upload the file first.");
+        alert("Please choose a file first.");
         return;
     }
     let fileUpload = $("#fileToUpload").get(0);
     let files = fileUpload.files;
     if (files[0].name.toLowerCase().lastIndexOf(".csv") == -1) {
-        alert("Please upload only CSV files");
+        alert("Must be a CSV file");
         return;
     }
     let reader = new FileReader();
