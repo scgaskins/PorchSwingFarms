@@ -35,6 +35,9 @@ namespace PorchSwingFarms.Pages.Orders
                 .ThenInclude(s => s.Customer)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
 
+            Console.WriteLine(Order.DeliveryDate);
+            Console.WriteLine(Order.SubscriptionID);
+
             if (Order == null)
             {
                 return NotFound();
@@ -42,34 +45,30 @@ namespace PorchSwingFarms.Pages.Orders
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Order).State = EntityState.Modified;
+            Order orderToUpdate = await _context.Orders.FindAsync(id);
 
-            try
+            if (orderToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Order>(
+                 orderToUpdate,
+                 "order",   // Prefix for form value.
+                   o => o.DeliveryDate, o => o.DeliveredYN, o => o.PaidForYN))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(Order.OrderID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool OrderExists(int id)
