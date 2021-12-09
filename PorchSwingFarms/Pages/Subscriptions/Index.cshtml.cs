@@ -30,6 +30,9 @@ namespace PorchSwingFarms.Pages.Subscriptions
         public string CurrentSort { get; set; }
         public int? CurrentSize { get; set; }
 
+        // The number of days in advance orders will be generated
+        public int DaysOrdersGenerated = 60;
+
         public PaginatedList<Subscription> Subscriptions { get;set; }
 
         public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, int? pageSize, bool? noPages)
@@ -105,11 +108,13 @@ namespace PorchSwingFarms.Pages.Subscriptions
             _context.Orders.AddRange(newOrders);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Orders/Index");
         }
 
         public List<Order> GenerateAllNewOrders(List<Subscription> subscriptions)
         {
+            Console.WriteLine(subscriptions.Count);
+            
             List<Order> newOrders = new List<Order>();
 
             foreach (Subscription sub in subscriptions)
@@ -137,10 +142,19 @@ namespace PorchSwingFarms.Pages.Subscriptions
                         currentOrderDate = sub.StartDate;
                     }
 
-                    while ((sub.EndDate != null && currentOrderDate <= sub.EndDate) && currentOrderDate <= DateTime.Now.AddDays(60))
+                    currentOrderDate = NextSaturday(currentOrderDate);
+
+                    // When we stop generating orders
+                    DateTime endDate = sub.EndDate != null ? sub.EndDate.Value : DateTime.Now.AddDays(DaysOrdersGenerated);
+
+                    while (currentOrderDate <= endDate)
                     {
-                        Order newOrder = MakeNewOrder(sub, currentOrderDate);
-                        newOrders.Add(newOrder);
+                        // Don't generate orders from the past
+                        if (currentOrderDate >= DateTime.Now)
+                        {
+                            Order newOrder = MakeNewOrder(sub, currentOrderDate);
+                            newOrders.Add(newOrder);
+                        }
 
                         // only make one order for a one time subscription
                         if (sub.Frequency == Subscription.OrderFrequency.OneTime)
@@ -180,11 +194,23 @@ namespace PorchSwingFarms.Pages.Subscriptions
             }
             else if (frequency == Subscription.OrderFrequency.Monthly)
             {
-                return originalDate.AddDays(30);
+                return NextSaturday(originalDate.AddMonths(1));
             }
             else
             {
                 return originalDate;
+            }
+        }
+
+        public DateTime NextSaturday(DateTime originalDate)
+        {
+            DayOfWeek dayOfWeek = originalDate.DayOfWeek;
+            if (((int)dayOfWeek) == 0)
+            {
+                return originalDate.AddDays(7);
+            } else
+            {
+                return originalDate.AddDays(6 - ((int)dayOfWeek));
             }
         }
     }
