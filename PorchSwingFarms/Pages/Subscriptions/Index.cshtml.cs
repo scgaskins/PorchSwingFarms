@@ -30,6 +30,9 @@ namespace PorchSwingFarms.Pages.Subscriptions
         public string CurrentSort { get; set; }
         public int? CurrentSize { get; set; }
 
+        // The number of days in advance orders will be generated
+        public int DaysOrdersGenerated = 60;
+
         public PaginatedList<Subscription> Subscriptions { get;set; }
 
         public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, int? pageSize, bool? noPages)
@@ -105,7 +108,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
             _context.Orders.AddRange(newOrders);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Orders/Index");
         }
 
         public List<Order> GenerateAllNewOrders(List<Subscription> subscriptions)
@@ -140,7 +143,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
                     }
 
                     // When we stop generating orders
-                    DateTime endDate = sub.EndDate != null ? sub.EndDate.Value : DateTime.Now.AddDays(60);
+                    DateTime endDate = sub.EndDate != null ? sub.EndDate.Value : DateTime.Now.AddDays(DaysOrdersGenerated);
 
                     while (currentOrderDate <= endDate)
                     {
