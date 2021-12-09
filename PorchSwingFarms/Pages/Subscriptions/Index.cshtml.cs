@@ -110,6 +110,7 @@ namespace PorchSwingFarms.Pages.Subscriptions
 
         public List<Order> GenerateAllNewOrders(List<Subscription> subscriptions)
         {
+
             List<Order> newOrders = new List<Order>();
 
             foreach (Subscription sub in subscriptions)
